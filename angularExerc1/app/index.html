@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"
+      ng-app="times">
+
+<head>
+  <meta charset="utf-8">
+  <script src="lib/angular/angular.js"></script>
+  <link rel="stylesheet"
+        type="text/css"
+        href="lib/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css"> 
+ 
+  <script src="js/app.js"></script>
+  <script src="js/controllers/timesController"></script>
+<script src="js/services/timesAPIService.js"></script>
+<script src="js/configValue/ConfigValue.js"></script>
+
+</head>
+
+<body ng-controller="timesController">
+  <div class="jumbotron">
+  <table class="table" style="width: 1000px; margin-left: 200px;">
+<tr>
+  <td>
+  <h4>{{mensagem}}</h4>
+<tr>
+  <td>
+  <h4>{{mensagem}}</h4>
+<table class="table table-striped">
+  <tr>
+    <th bgcolor="#ff99e6">times</th>
+  </tr>
+  <tr ng-repeat="time in times">
+    <td bgcolor="#ffccf2">{{limitarCaract(time.nome)}}</td>
+  </tr>
+  
+</table>
+<form name="timeForm">
+<input class="form-control" type="text" ng-model="time.nome" name="nome" placeholder="nome" ng-required="true">
+</form>
+<button class="btn btn-primary btn-block" ng-click="adicionarTime(time)" ng-disabled=timeForm.$invalid>confirmar</button>
+
+
+</td>
+<td>
+<table class="table table-striped" >
+  <tr>
+    <th bgcolor="#ff99e6">torneio</th>
+    <th bgcolor="#ff99e6">data inicial</th>
+    <th bgcolor="#ff99e6">data final</th>
+    
+  </tr>
+  
+  <tr ng-repeat="torneio in torneios">
+    <td bgcolor="#ffccf2">{{torneio.nome}}</td>
+    <td bgcolor="#ffccf2">{{torneio.dataInicial | date: "dd/mm/yy - HH:mm"}}</td>
+    <td bgcolor="#ffccf2">{{torneio.dataFinal | date: "dd/mm/yy - HH:mm"}}</td>
+    
+  </tr>
+</table>
+<form name="torneioForm">
+<input class="form-control" type="text" name="nome" ng-model="torneio.nome" placeholder="nome" ng-required="true" ng-maxlength=20>
+<input class="form-control" type="date" name="dataFinal" ng-model="torneio.dataFinal" placeholder="data final" ng-required="true" >
+</form>
+<div ng-show="torneioForm.nome.$invalid && !torneioForm.nome.$error.required" class="alert alert-danger" style="size: 2px;">por favor insira menos de 20 caracters</div>
+<button class="btn btn-primary btn-block" ng-click="adicionarTorneio(torneio) " ng-disabled="torneioForm.$invalid">confirmar</button>
+
+</table>
+<div ng-include="'view/rodape.html'" style="width: 1000px; margin-left: 200px; margin-top: 20%;" ></div>
+</div>
+</body>
+
+</html>

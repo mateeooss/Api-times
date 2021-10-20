@@ -1,0 +1,46 @@
+
+angular.module("times").controller("timesController", function($scope, $http, timesApi){
+
+        $scope.times=[];
+        $scope.torneios=[];
+
+        var carregarTorneios = function(){
+        timesApi.getTorneio().then(function(data){
+          $scope.torneios=data.data;
+        
+        })}
+
+        var carregarTimes = function(){
+        $http.get("http://localhost:8080/api-time/time").then(function(data){
+          $scope.times=data.data;
+
+        })};
+
+        $scope.adicionarTorneio = function(torneio){
+          console.log(torneio)
+          $http.post("http://localhost:8080/api-torneio/torneio", torneio).then(function(data){
+             delete $scope.torneio;
+             
+             carregarTorneios();
+
+          })
+        }
+        $scope.limitarCaract = function(text){
+          //  if (text.length > 20){ return text.substr(0,20)+"..."; }else{
+          //    return text
+          //  }
+           return text.length >20 ?  text.substr(0,20)+"..." : text;
+
+        }
+        $scope.adicionarTime = function(time){
+          console.log(time)
+          $http.post("http://localhost:8080/api-time/time ", time).then(function(data){
+             delete $scope.time;
+             carregarTimes();
+
+          })}
+
+        carregarTimes();
+        carregarTorneios();
+      })
+   

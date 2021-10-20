@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/api-time")
 public class TimeController {
@@ -16,6 +17,7 @@ public class TimeController {
     public void adicionarTime(@RequestBody @Validated Time time){
        timeRep.save(time);
     }
+
 
    @GetMapping("/time")
    public List<Time> listarTimes(){

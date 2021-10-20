@@ -4,6 +4,7 @@ import com.exercicio1.demo.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -12,6 +13,7 @@ public class TorneioService {
     TorneioRepository torneioRepo;
 
     public void save(Torneio torneio){
+        torneio.setDataInicial(Calendar.getInstance().getTime());
         torneioRepo.save(torneio);
     }
 

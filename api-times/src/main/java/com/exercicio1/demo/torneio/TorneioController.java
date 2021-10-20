@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping(value="/api-torneio")
 public class TorneioController {
     @Autowired
-    TorneioRepository torneioService;
+    TorneioService torneioService;
 
     @PostMapping("/torneio")
     public void salvarTorneio(@RequestBody @Validated Torneio torneio){
